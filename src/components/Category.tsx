@@ -1,13 +1,29 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import { CategoryAtom, ItemsAtom } from "../recoil/Atom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { CategoryAtom, ItemsAtom, SelectRouteAtom } from "../recoil/Atom";
+import { useState } from "react";
 
 const Category: React.FC = () => {
   const data = useRecoilValue(ItemsAtom);
-  const [selecteCategory, setSelecteCategory] = useRecoilState(CategoryAtom);
-  console.log(selecteCategory);
+  const [selecteCategory, setSelecteCategory] = useState(2);
+  const [changeCategory, setChangeCategory] = useRecoilState(CategoryAtom);
+  const routeValeu = useSetRecoilState(SelectRouteAtom);
+  console.log(changeCategory);
+
+  const changeCategorey = (key: number) => {
+    switch (key) {
+      case 2:
+        return "category_01";
+      case 1:
+        return "category_02";
+    }
+  };
 
   const handleSelecteCategory = (key: number) => {
     setSelecteCategory(key);
+    routeValeu([]);
+    const changeKey = changeCategorey(key);
+    // console.log(changeKey);
+    setChangeCategory(String(changeKey));
   };
 
   return (

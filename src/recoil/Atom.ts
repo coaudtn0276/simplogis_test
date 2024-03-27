@@ -3,12 +3,19 @@ import { DataType } from "../type/types";
 
 export const ItemsAtom = atom<DataType>({
   key: "ItemsAtom",
-  default: <DataType>{},
+  default: {
+    range: 0,
+    updatedAt: "",
+    unit: "",
+    routeList: [],
+    categoryList: [],
+    data: [],
+  },
 });
 
 export const CategoryAtom = atom({
   key: "CategoryAtom",
-  default: 2,
+  default: "category_01",
 });
 
 export const SelectRouteAtom = atom<number[]>({
