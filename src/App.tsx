@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { ItemsAtom } from "./recoil/Atom";
 import { useEffect } from "react";
 
@@ -12,7 +12,7 @@ import DataTable from "./components/DataTable";
 // import { DataType } from "./type/types";
 
 function App() {
-  const [data, setData] = useRecoilState(ItemsAtom);
+  const setData = useSetRecoilState(ItemsAtom);
 
   useEffect(() => {
     setData(testData as DataType);
@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="flex justify-center text-xs sm:text-sm md:text-base lg:text-lg">
-      <div className="flex flex-col w-10/12 border-2 border-red-700 pb-4">
+      <div className="flex flex-col w-10/12">
         <div className="pt-4">
           <Category />
         </div>

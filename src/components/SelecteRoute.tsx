@@ -4,7 +4,7 @@ import { ItemsAtom, SelectRouteAtom } from "../recoil/Atom";
 const SelecteRoute = () => {
   const data = useRecoilValue(ItemsAtom);
   const [selectRoute, setSelectRoute] = useRecoilState<number[]>(SelectRouteAtom);
-  console.log(selectRoute);
+  // console.log(selectRoute);
 
   const sortRouteList = [...(data.routeList || [])].sort((a, b) => {
     return a[0] - b[0];
