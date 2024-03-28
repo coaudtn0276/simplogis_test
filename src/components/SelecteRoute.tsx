@@ -7,9 +7,7 @@ const SelecteRoute = () => {
   console.log(selectRoute);
 
   const sortRouteList = [...(data.routeList || [])].sort((a, b) => {
-    const numA = typeof a[0] === "number" ? a[0] : 0;
-    const numB = typeof b[0] === "number" ? b[0] : 0;
-    return numA - numB;
+    return a[0] - b[0];
   });
 
   const handleAddRoute = (item: number) => {

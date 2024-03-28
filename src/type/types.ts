@@ -24,3 +24,7 @@ export type DataType = {
 export type CategoryType = {
   filterCategory: CategoryListEntry[];
 };
+
+export type FilterPropsData = {
+  filterData: DataPoint[];
+};

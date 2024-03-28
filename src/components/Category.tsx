@@ -7,7 +7,7 @@ const Category: React.FC = () => {
   const [selecteCategory, setSelecteCategory] = useState(2);
   const [changeCategory, setChangeCategory] = useRecoilState(CategoryAtom);
   const routeValeu = useSetRecoilState(SelectRouteAtom);
-  console.log(changeCategory);
+  // console.log(changeCategory);
 
   const changeCategorey = (key: number) => {
     switch (key) {
@@ -20,7 +20,7 @@ const Category: React.FC = () => {
 
   const handleSelecteCategory = (key: number) => {
     setSelecteCategory(key);
-    routeValeu([]);
+    routeValeu([1]);
     const changeKey = changeCategorey(key);
     // console.log(changeKey);
     setChangeCategory(String(changeKey));
