@@ -77,7 +77,7 @@ const LowHighAverageTable: React.FC<FilterPropsData> = ({ filterData }) => {
   return (
     <div className="flex justify-center">
       <div className="w-full flex flex-col">
-        <div className="flex h-11 items-center justify-center text-xs sm:text-xs md:text-sm lg:text-base bg-gray-600 text-white rounded-t-lg">
+        <div className="flex h-14 items-center justify-center text-xs sm:text-xs md:text-sm lg:text-base bg-gray-600 text-white rounded-t-lg">
           <h1 className="flex-1 text-center">Route</h1>
           {datesList.map((el, idx) => {
             return (
