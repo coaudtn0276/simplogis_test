@@ -19,7 +19,7 @@ const DataTable = () => {
 
   //카테고리에 맞는 데이터 필터
   const filterDataCategorey = () => {
-    return [...data.data].filter((items) => {
+    return [...(data?.data ?? [])].filter((items) => {
       return items.categoryId === categoryValue;
     });
   };

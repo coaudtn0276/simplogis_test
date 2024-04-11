@@ -1,10 +1,11 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DataPoint, FilterPropsData } from "../type/types";
-import { SelectRouteAtom } from "../recoil/Atom";
-import React from "react";
+import { SelectRouteAtom, SelectRouteData } from "../recoil/Atom";
+import React, { useEffect } from "react";
 
 const Monthly: React.FC<FilterPropsData> = ({ filterData }) => {
   const routeValue = useRecoilValue(SelectRouteAtom);
+  const setSelectRouteData = useSetRecoilState(SelectRouteData);
 
   // routeValue에서 선택된 고유 값을 routeId의 값으로 변경
   const changeRouteValue = routeValue.map((id) => {
@@ -38,8 +39,6 @@ const Monthly: React.FC<FilterPropsData> = ({ filterData }) => {
     return [...selectedData, ...unselectedData];
   }, [changeRouteValue, filterData]);
 
-  // console.log(sortedFilterData);
-
   // 데이터 초단위 내림차순 정렬 후 7개
   const getTop7Data = (categoryData: DataPoint[]) => {
     // 데이터 배열을 복사하고, 초단위 기준으로 내림차순 정렬
@@ -47,6 +46,7 @@ const Monthly: React.FC<FilterPropsData> = ({ filterData }) => {
     return sortedData.slice(0, 7);
   };
   // console.log(getTop7Data(filterData));
+  // console.log("sortedFilterData", getTop7Data(sortedFilterData));
 
   const getMapTop7Data = (categoryData: DataPoint) => {
     // 데이터 배열을 복사하고, 초단위 기준으로 내림차순 정렬
@@ -54,7 +54,7 @@ const Monthly: React.FC<FilterPropsData> = ({ filterData }) => {
     return sortedData.slice(0, 7);
   };
 
-  const datesList = getTop7Data(filterData).map((el) => {
+  const datesList = getTop7Data(sortedFilterData).map((el) => {
     const changeDate = () => {
       const timestamp = el[0];
       const date = new Date(timestamp);
@@ -71,12 +71,21 @@ const Monthly: React.FC<FilterPropsData> = ({ filterData }) => {
     return changeDate();
   });
 
+  useEffect(() => {
+    const selectedData = filterData.filter((item) => changeRouteValue.includes(item.routeId));
+    // console.log(selectedData);
+
+    setSelectRouteData(selectedData);
+  }, [changeRouteValue, filterData, setSelectRouteData]);
+
   return (
     <div className="flex justify-center">
       <div className="w-full flex flex-col">
         <div className="flex h-14 items-center justify-center text-xs sm:text-xs md:text-sm lg:text-base bg-gray-600 text-white rounded-t-lg">
           <h1 className="flex-1 text-center">Route</h1>
           {datesList.map((el, idx) => {
+            // console.log("datasList", el);
+
             return (
               <div key={idx} className="flex-1 text-center">
                 {el}
@@ -86,6 +95,10 @@ const Monthly: React.FC<FilterPropsData> = ({ filterData }) => {
         </div>
         {sortedFilterData.map((item, idx) => {
           const dataTableList = getMapTop7Data(item);
+
+          // console.log("dataTableList", dataTableList);
+          // console.log("sortedFilterData", item.data.slice(0, 7));
+
           return (
             <div key={idx} className={`flex py-2 items-center justify-center text-xs sm:text-xs md:text-sm lg:text-base ${changeRouteValue.includes(item.routeId) ? "bg-[#eefff7]" : idx % 2 !== 0 ? "bg-gray-100" : ""}`}>
               <h1 className="flex-1 text-center">{item.routeKor}</h1>

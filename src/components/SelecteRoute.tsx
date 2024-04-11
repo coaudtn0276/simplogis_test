@@ -6,7 +6,7 @@ const SelecteRoute = () => {
   const [selectRoute, setSelectRoute] = useRecoilState<number[]>(SelectRouteAtom);
   // console.log(selectRoute);
 
-  const sortRouteList = [...(data.routeList || [])].sort((a, b) => {
+  const sortRouteList = [...((data && data.routeList) || [])].sort((a, b) => {
     return a[0] - b[0];
   });
 

@@ -1,16 +1,9 @@
 import { atom } from "recoil";
-import { DataType } from "../type/types";
+import { DataPoint, DataType } from "../type/types";
 
-export const ItemsAtom = atom<DataType>({
+export const ItemsAtom = atom<DataType | null>({
   key: "ItemsAtom",
-  default: {
-    range: 0,
-    updatedAt: "",
-    unit: "",
-    routeList: [],
-    categoryList: [],
-    data: [],
-  },
+  default: null,
 });
 
 export const CategoryAtom = atom({
@@ -21,4 +14,9 @@ export const CategoryAtom = atom({
 export const SelectRouteAtom = atom<number[]>({
   key: "SelectRouteAtom",
   default: [1],
+});
+
+export const SelectRouteData = atom<DataPoint[] | null>({
+  key: "SelectRouteData",
+  default: null,
 });

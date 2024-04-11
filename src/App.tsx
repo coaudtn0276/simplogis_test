@@ -9,7 +9,7 @@ import Category from "./components/Category";
 import SelecteRoot from "./components/SelecteRoute";
 import { DataType } from "./type/types";
 import DataTable from "./components/DataTable";
-// import { DataType } from "./type/types";
+import DataChart from "./components/DataChart";
 
 function App() {
   const setData = useSetRecoilState(ItemsAtom);
@@ -27,6 +27,11 @@ function App() {
         <div className="pt-4">
           <SelecteRoot />
         </div>
+
+        <div className="pt-4">
+          <DataChart />
+        </div>
+
         <div className="pt-4">
           <DataTable />
         </div>
